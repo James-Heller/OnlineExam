@@ -12,11 +12,17 @@ public class User implements Serializable {
     private String ID;
     private String Password;
     private boolean isAdmin;
+    private String Name;
+    private int Score;
+    private String Class;
 
-    public User(String ID,String Password,boolean isAdmin){
+    public User(String ID,String Password,String Name, int Score, String Class, boolean isAdmin){
 
         this.ID=ID;
         this.Password=Password;
+        this.Name=Name;
+        this.Score=Score;
+        this.Class=Class;
         this.isAdmin=isAdmin;
     }
 

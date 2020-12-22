@@ -5,6 +5,7 @@ import edu.JamesTang.onlineExam.Model.entity.User;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -58,7 +59,19 @@ public class UserDaoImplement implements UserDao{
 
     @Override
     public List<User> getUserList() {
-        return null;
+
+        DBConnect.init();
+        ArrayList<User> list=new ArrayList<>();
+        try{
+            ResultSet result=DBConnect.selectSQL("SELECT * FROM user;");
+            while (result.next()){
+                list.add(new User(result.getString("ID"), result.getString("PASSWORD"), result.getString("NAME"),
+                        result.getInt("SCORE"),result.getString("CLASS"), result.getInt("isAdmin") == 1));
+            }
+        }catch (SQLException e){
+            e.printStackTrace();
+        }
+        return list;
     }
 
     @Override
