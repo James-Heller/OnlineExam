@@ -17,7 +17,12 @@
   
   <servlet>
     <servlet-name>loginServlet</servlet-name>
-    <servlet-class>edu.JamesTang.onlineExam.Controller.servlet.userServlet.loginServlet</servlet-class>
+    <servlet-class>edu.JamesTang.onlineExam.Controller.servlet.userServlet.LoginServlet</servlet-class>
+  </servlet>
+
+  <servlet>
+    <servlet-name>registerServlet</servlet-name>
+    <servlet-class>edu.JamesTang.onlineExam.Controller.servlet.userServlet.RegisterServlet</servlet-class>
   </servlet>
   
   <servlet-mapping>
@@ -25,7 +30,12 @@
     <url-pattern>/loginServlet</url-pattern>
   </servlet-mapping>
   
+  <servlet-mapping>
+    <servlet-name>registerServlet</servlet-name>
+    <url-pattern>/registerServlet</url-pattern>
+  </servlet-mapping>
+  
   <welcome-file-list>
-    <welcome-file>login.jsp</welcome-file>
+    <welcome-file>index.jsp</welcome-file>
   </welcome-file-list>
 </web-app>

@@ -18,11 +18,13 @@ public class UserDaoImplement implements UserDao{
     @Override
     public boolean register(User user) {
 
+        checkExist(user);
+
         DBConnect.init();
         boolean flag=false;
 
         int i=DBConnect.addUpdateDelete("INSERT INTO user VALUES ('"+user.getID()+"', '"+user.getPassword()+"', " +
-                "'"+user.getName()+", ', '"+user.getClassid()+"', '"+user.getScore()+"', '"+user.getAdmin()+"')");
+                "'"+user.getName()+"', '"+user.getClassid()+"', '"+user.getScore()+"', '"+parseBoolean(user.getAdmin())+"')");
 
         if(i>0){
             flag=true;
@@ -132,5 +134,30 @@ public class UserDaoImplement implements UserDao{
         }
         DBConnect.closeConnect();
         return flag;
+    }
+
+    private static  int parseBoolean(boolean bool){
+        if(bool){
+            return 1;
+        }
+        else {
+            return 0;
+        }
+    }
+
+    private boolean checkExist(User user){
+
+        DBConnect.init();
+
+        ResultSet result=DBConnect.selectSQL("SELECT * FROM user WHERE ID='"+user.getID()+"';");
+        try{
+            if(result.next()){
+                return true;
+            }
+        }catch (SQLException e){
+            e.printStackTrace();
+            return false;
+        }
+        return false;
     }
 }

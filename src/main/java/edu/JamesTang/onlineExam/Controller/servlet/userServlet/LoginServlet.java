@@ -14,11 +14,11 @@ import java.io.IOException;
  * @date 2020/12/22 21:27
  */
 
-public class loginServlet extends HttpServlet {
+public class LoginServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        super.doGet(req, resp);
+        doPost(req, resp);
     }
 
     @Override
