@@ -160,4 +160,21 @@ public class UserDaoImplement implements UserDao{
         }
         return false;
     }
+
+    @Override
+    public User getUser(String id) {
+
+        DBConnect.init();
+        User user=null;
+        try {
+            ResultSet result=DBConnect.selectSQL("SELECT * FROM user WHERE ID='"+id+"';");
+            while (result.next()){
+                user=new User(result.getString("ID"), result.getString("PASSWORD"), result.getString("NAME"),
+                        result.getInt("SCORE"),result.getString("CLASS"), result.getInt("isAdmin") == 1);
+            }
+        }catch (SQLException e){
+            e.printStackTrace();
+        }
+        return user;
+    }
 }

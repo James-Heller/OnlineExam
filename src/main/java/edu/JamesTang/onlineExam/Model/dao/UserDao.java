@@ -61,4 +61,11 @@ public interface UserDao {
      * @return true if operate success
      */
     boolean updateScore(String iD, int score);
+
+    /**
+     * return current user
+     * @param id locate User
+     * @return user
+     */
+    User getUser(String id);
 }

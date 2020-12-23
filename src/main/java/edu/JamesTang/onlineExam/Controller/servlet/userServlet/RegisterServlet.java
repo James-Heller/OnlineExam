@@ -34,6 +34,7 @@ public class RegisterServlet extends HttpServlet {
         UserDao ud=new UserDaoImplement();
 
         if(ud.register(user)){
+            req.setAttribute("id",iD);
             req.getRequestDispatcher("/login.jsp").forward(req,resp);
 
         }

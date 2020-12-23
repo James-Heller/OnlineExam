@@ -11,10 +11,10 @@ import java.io.IOException;
 
 /**
  * @author JamesTang
- * @date 2020/12/22 21:27
+ * @date 2020/12/23 23:15
  */
 
-public class LoginServlet extends HttpServlet {
+public class UpdateScoreServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -24,16 +24,15 @@ public class LoginServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-        String ID=req.getParameter("id");
-        String passWord=req.getParameter("password");
+        String id=req.getParameter("id");
+        int score=Integer.getInteger(req.getParameter("score"));
 
-        UserDao ud= new UserDaoImplement();
-        if(ud.login(ID,passWord)){
-            req.setAttribute("user",ud.getUser(ID));
-            req.getRequestDispatcher("/success.jsp").forward(req,resp);
-        }else {
-            resp.sendRedirect("login.jsp");
+        UserDao ud=new UserDaoImplement();
+
+        if(ud.updateScore(id,score)){
+
         }
+
 
     }
 }
