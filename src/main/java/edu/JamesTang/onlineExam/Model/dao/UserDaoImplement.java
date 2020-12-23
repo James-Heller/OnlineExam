@@ -15,17 +15,33 @@ import java.util.List;
 
 public class UserDaoImplement implements UserDao{
 
+    @Override
+    public boolean register(User user) {
+
+        DBConnect.init();
+        boolean flag=false;
+
+        int i=DBConnect.addUpdateDelete("INSERT INTO user VALUES ('"+user.getID()+"', '"+user.getPassword()+"', " +
+                "'"+user.getName()+", ', '"+user.getClassid()+"', '"+user.getScore()+"', '"+user.getAdmin()+"')");
+
+        if(i>0){
+            flag=true;
+        }
+        DBConnect.closeConnect();
+        return flag;
+    }
+
 
     @Override
-    public boolean login(String ID, String Password){
+    public boolean login(String iD, String password){
 
         DBConnect.init();
         boolean flag=false;
 
         try {
-            ResultSet result=DBConnect.selectSQL("SELECT * FROM user WHERE ID='"+ID+"' AND PASSWORD='"+Password+"';");
+            ResultSet result=DBConnect.selectSQL("SELECT * FROM user WHERE ID='"+iD+"' AND PASSWORD='"+password+"';");
             while (result.next()){
-                if(result.getString("ID").equals(ID) && result.getString("PASSWORD").equals(Password)){
+                if(result.getString("ID").equals(iD) && result.getString("PASSWORD").equals(password)){
                     flag=true;
                 }
             }
@@ -71,25 +87,46 @@ public class UserDaoImplement implements UserDao{
         }catch (SQLException e){
             e.printStackTrace();
         }
+
+        DBConnect.closeConnect();
         return list;
     }
 
     @Override
-    public boolean deleteAccount() {
-        return false;
-    }
-
-    @Override
-    public boolean updatePassword(String ID) {
-        return false;
-    }
-
-    @Override
-    public boolean updateScore(String ID,int Score) {
+    public boolean deleteAccount(String iD) {
 
         DBConnect.init();
         boolean flag=false;
-        String sql="UPDATE user SET SCORE='"+Score+"' WHERE ID='"+ID+"';";
+
+        int i=DBConnect.addUpdateDelete("DELETE FROM user where ID='"+iD+"';");
+        if(i>0){
+            flag=true;
+        }
+
+        DBConnect.closeConnect();
+        return flag;
+    }
+
+    @Override
+    public boolean updatePassword(String iD,String password) {
+
+        DBConnect.init();
+        boolean flag=false;
+
+        int i=DBConnect.addUpdateDelete("UPDATE user SET PASSWORD='"+password+"' WHERE ID='"+iD+"';");
+        if(i>0){
+            flag=true;
+        }
+        DBConnect.closeConnect();
+        return flag;
+    }
+
+    @Override
+    public boolean updateScore(String iD, int score) {
+
+        DBConnect.init();
+        boolean flag=false;
+        String sql="UPDATE user SET SCORE='"+score+"' WHERE ID='"+iD+"';";
         if(DBConnect.addUpdateDelete(sql) > 0){
             flag=true;
         }

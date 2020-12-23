@@ -49,4 +49,29 @@ public class User implements Serializable {
     public boolean getAdmin(){
         return isAdmin;
     }
+
+    public String getName() {
+        return Name;
+    }
+
+    public void setName(String name) {
+        Name = name;
+    }
+
+    public int getScore() {
+        return Score;
+    }
+
+    public void setScore(int score) {
+        Score = score;
+    }
+
+
+    public String getClassid() {
+        return Class;
+    }
+
+    public void setClassid(String aClass) {
+        Class = aClass;
+    }
 }
