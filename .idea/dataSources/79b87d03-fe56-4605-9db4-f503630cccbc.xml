@@ -4490,7 +4490,6 @@ SELECT|sys.sys_config
       <Position>1</Position>
       <DataType>int|0s</DataType>
       <NotNull>1</NotNull>
-      <SequenceIdentity>null</SequenceIdentity>
     </column>
     <column id="1097" parent="364" name="subjectTitle">
       <Position>2</Position>

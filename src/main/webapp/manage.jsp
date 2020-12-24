@@ -17,7 +17,7 @@
     String basepath=request.getScheme()+"://"+ request.getServerName()+":"+request.getServerPort()+"/";
 %>
 <c:forEach var="U" items="${requestScope.all}">
-    <form action="managementServlet" method="post">
+    <form action="updateScoreServlet" method="post">
 
         <div class="layui-container">
 
@@ -49,7 +49,7 @@
                     </div>
                     <div class="layui-input-block">
                         <input type="text" value="${U.score}" name="score" class="layui-input"/>
-                        <input type="submit" >
+                        <input type="submit" value="更改" name="updatescore" class="layui-btn layui-btn-xs">
                     </div>
                 </div>
             </div>

@@ -5,6 +5,9 @@ import edu.JamesTang.onlineExam.Model.entity.ExamPaper;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 
 /**
@@ -93,6 +96,7 @@ public class PaperDaoImplement implements PaperDao{
             case 2: i=DBConnect.addUpdateDelete("UPDATE tb_subject SET subjectOptionB='"+optionText+"' WHERE subjectID='"+paperID+"'");break;
             case 3: i=DBConnect.addUpdateDelete("UPDATE tb_subject SET subjectOptionC='"+optionText+"' WHERE subjectID='"+paperID+"'");break;
             case 4: i=DBConnect.addUpdateDelete("UPDATE tb_subject SET subjectOptionD='"+optionText+"' WHERE subjectID='"+paperID+"'");break;
+            default:
         }
 
         if(i>0){
@@ -115,6 +119,7 @@ public class PaperDaoImplement implements PaperDao{
             case 2:i=DBConnect.addUpdateDelete("UPDATE tb_subject SET subjectAnswer='B' WHERE subjectID='"+paperID+"'");break;
             case 3:i=DBConnect.addUpdateDelete("UPDATE tb_subject SET subjectAnswer='C' WHERE subjectID='"+paperID+"'");break;
             case 4:i=DBConnect.addUpdateDelete("UPDATE tb_subject SET subjectAnswer='D' WHERE subjectID='"+paperID+"'");break;
+            default:
         }
 
         if(i>0){
@@ -139,7 +144,7 @@ public class PaperDaoImplement implements PaperDao{
     }
 
     @Override
-    public ExamPaper getPaper(String paperID) {
+    public ExamPaper getPaper(int paperID) {
 
         DBConnect.init();
         ExamPaper paper;
@@ -159,5 +164,52 @@ public class PaperDaoImplement implements PaperDao{
        }
 
        return null;
+    }
+
+    @Override
+    public ArrayList<Integer> paperCount() throws SQLException{
+        ArrayList<Integer> array=new ArrayList<>();
+        String label="COUNT(*)";
+        DBConnect.init();
+        ResultSet result=DBConnect.selectSQL("SELECT COUNT(*) FROM tb_subject");
+        while(result.next()){
+
+            for(int i=1; i<result.getInt(label);i++){
+                array.add(i);
+            }
+        }
+        Collections.shuffle(array);
+        DBConnect.closeConnect();
+        return array;
+    }
+
+    @Override
+    public List<ExamPaper> getRandomPaper() throws SQLException{
+
+        ArrayList<ExamPaper> examPapers=new ArrayList<>();
+
+        for (int i : paperCount()) {
+            examPapers.add(getPaper(i));
+        }
+        return examPapers.subList(0,10);
+    }
+
+    @Override
+    public char getAnswer(int id) {
+
+        DBConnect.init();
+        char answer=0;
+
+        ResultSet result=DBConnect.selectSQL("SELECT subjectAnswer FROM tb_subject WHERE subjectID="+id+"");
+
+        try {
+            while (result.next()){
+                answer=result.getString("subjectAnswer").charAt(1);
+                return answer;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return answer;
     }
 }

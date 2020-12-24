@@ -16,14 +16,16 @@
 <%
     String path=request.getContextPath();
     String basepath=request.getScheme()+"://"+ request.getServerName()+":"+request.getServerPort()+"/";
+
 %>
-
-
-
-<a href="managementServlet">教师入口</a>
-
-
-<a href="#">学生入口</a>
+<p>欢迎，${requestScope.userId}</p>
+<c:set var="admin" scope="page" value="${requestScope.user}"/>
+<c:if test="${admin}" >
+    <a href="managementServlet" id="admin">教师入口</a>
+</c:if>
+<c:if test="${!admin}">
+    <a href="getExamServlet" id="student" >学生入口</a>
+</c:if>
 
 
 </body>

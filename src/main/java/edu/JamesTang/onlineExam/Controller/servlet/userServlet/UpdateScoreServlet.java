@@ -25,12 +25,12 @@ public class UpdateScoreServlet extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
         String id=req.getParameter("id");
-        int score=Integer.getInteger(req.getParameter("score"));
+        String score=req.getParameter("score");
 
         UserDao ud=new UserDaoImplement();
 
-        if(ud.updateScore(id,score)){
-
+        if(ud.updateScore(id,Integer.parseInt(score))){
+            req.getRequestDispatcher("operatesuccess.jsp").forward(req,resp);
         }
 
 

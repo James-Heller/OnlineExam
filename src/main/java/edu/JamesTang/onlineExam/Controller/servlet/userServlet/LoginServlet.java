@@ -29,7 +29,8 @@ public class LoginServlet extends HttpServlet {
 
         UserDao ud= new UserDaoImplement();
         if(ud.login(ID,passWord)){
-            req.setAttribute("user",ud.getUser(ID));
+            req.setAttribute("userId",ID);
+            req.setAttribute("user",ud.isAdmin(ID));
             req.getRequestDispatcher("/success.jsp").forward(req,resp);
         }else {
             resp.sendRedirect("login.jsp");

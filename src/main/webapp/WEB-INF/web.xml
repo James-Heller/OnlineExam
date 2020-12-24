@@ -28,6 +28,21 @@
     <servlet-name>managementServlet</servlet-name>
     <servlet-class>edu.JamesTang.onlineExam.Controller.servlet.userServlet.ManageServlet</servlet-class>
   </servlet>
+
+  <servlet>
+    <servlet-name>updateScoreServlet</servlet-name>
+    <servlet-class>edu.JamesTang.onlineExam.Controller.servlet.userServlet.UpdateScoreServlet</servlet-class>
+  </servlet>
+
+  <servlet>
+    <servlet-name>getExamServlet</servlet-name>
+    <servlet-class>edu.JamesTang.onlineExam.Controller.servlet.paperServlet.GetExamServlet</servlet-class>
+  </servlet>
+
+  <servlet>
+    <servlet-name>examServlet</servlet-name>
+    <servlet-class>edu.JamesTang.onlineExam.Controller.servlet.paperServlet.ExamServlet</servlet-class>
+  </servlet>
   
   <servlet-mapping>
     <servlet-name>loginServlet</servlet-name>
@@ -42,6 +57,21 @@
   <servlet-mapping>
     <servlet-name>managementServlet</servlet-name>
     <url-pattern>/managementServlet</url-pattern>
+  </servlet-mapping>
+
+  <servlet-mapping>
+    <servlet-name>updateScoreServlet</servlet-name>
+    <url-pattern>/updateScoreServlet</url-pattern>
+  </servlet-mapping>
+  
+  <servlet-mapping>
+    <servlet-name>getExamServlet</servlet-name>
+    <url-pattern>/getExamServlet</url-pattern>
+  </servlet-mapping>
+  
+  <servlet-mapping>
+    <servlet-name>examServlet</servlet-name>
+    <url-pattern>/examServlet</url-pattern>
   </servlet-mapping>
   
   <welcome-file-list>
