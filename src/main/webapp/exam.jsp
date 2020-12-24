@@ -15,30 +15,33 @@
 <%
     String path=request.getContextPath();
     String basepath=request.getScheme()+"://"+ request.getServerName()+":"+request.getServerPort()+"/";
+    request.setAttribute("thisID",request.getParameter("thisID"));
+    session.setAttribute("contentID",request.getParameter("thisID"));
+
 %>
 
 
-<input name="userID" value="${requestScope.userId}" hidden="hidden"/>
-
-<c:forEach var="P" items="${requestScope.papers}" varStatus="id">
-<form action="examServlet" method="post" class="layui-form" id="pushInfo${id.count}">
-    <div class="layui-container">
-        <div class="layui-row">
-            <div class="layui-col-md9">
-                <div class="layui-form-label">
-                    <label class="layui-form-label" >${P.paperID}. </label>${P.paperTitle}
-                    <input name="subjectID${id.count}" value="${P.paperID}" hidden="hidden"/>
+<form action="examServlet" method="post" class="layui-form" id="pushInfo">
+    <c:forEach var="P" items="${requestScope.papers}" varStatus="id">
+        <div class="layui-container">
+            <div class="layui-row">
+                <div class="layui-col-md9">
+                    <div class="layui-form-label">
+                        <label class="layui-form-label" >${P.paperID}. </label>${P.paperTitle}
+                        <input name="subjectID${id.count}" value="${P.paperID}" hidden="hidden"/>
+                    </div>
+                    <div class="layui-field-box">A: ${P.optionA} B: ${P.optionB} C: ${P.optionC} D: ${P.optionD}</div>
+                    <input type="radio" name="option${id.count}" value="A" title="A" class="layui-form-radio"> A
+                    <input type="radio" name="option${id.count}" value="B" title="B" class="layui-form-radio"> B
+                    <input type="radio" name="option${id.count}" value="C" title="C" class="layui-form-radio"> C
+                    <input type="radio" name="option${id.count}" value="D" title="D" class="layui-form-radio"> D
                 </div>
-                <div class="layui-field-box">A: ${P.optionA} B: ${P.optionB} C: ${P.optionC} D: ${P.optionD}</div>
-                <input type="radio" name="option${id.count}" value="A" title="A" class="layui-form-radio"> A
-                <input type="radio" name="option${id.count}" value="B" title="B" class="layui-form-radio"> B
-                <input type="radio" name="option${id.count}" value="C" title="C" class="layui-form-radio"> C
-                <input type="radio" name="option${id.count}" value="D" title="D" class="layui-form-radio"> D
             </div>
         </div>
-    </div>
+    </c:forEach>
+
+    <input type="submit" name="push"  class="layui-btn-normal layui-btn-lg"/>
 </form>
-</c:forEach>
 
 </body>
 </html>

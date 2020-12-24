@@ -204,7 +204,7 @@ public class PaperDaoImplement implements PaperDao{
 
         try {
             while (result.next()){
-                answer=result.getString("subjectAnswer").charAt(1);
+                answer=result.getString("subjectAnswer").charAt(0);
                 return answer;
             }
         } catch (SQLException e) {
